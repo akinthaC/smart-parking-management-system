@@ -1,32 +1,24 @@
-package lk.ijse.parkingspaceservice.entity;
+package lk.ijse.paymentservice.dto;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-public class ParkingLog {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ParkingLogDTO {
     private Long id;
-
     private String email;
     private String vehicleNumber;
-
     private LocalDateTime checkInTime;
     private LocalDateTime checkOutTime;
-
-    @ManyToOne
-    @JoinColumn(name = "parking_space_id")
-    private ParkingSpace parkingSpace;
-
+    private Long parkingSpaceId;
     private Boolean isActive;
     private double totalFee;
     private long durationInMinutes;
 
     private boolean isPaid;
 
-    // Getters and Setters
+    public ParkingLogDTO() {}
+
+
+
     public Long getId() {
         return id;
     }
@@ -34,7 +26,6 @@ public class ParkingLog {
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getEmail() {
         return email;
@@ -68,12 +59,12 @@ public class ParkingLog {
         this.checkOutTime = checkOutTime;
     }
 
-    public ParkingSpace getParkingSpace() {
-        return parkingSpace;
+    public Long getParkingSpaceId() {
+        return parkingSpaceId;
     }
 
-    public void setParkingSpace(ParkingSpace parkingSpace) {
-        this.parkingSpace = parkingSpace;
+    public void setParkingSpaceId(Long parkingSpaceId) {
+        this.parkingSpaceId = parkingSpaceId;
     }
 
     public Boolean getActive() {
@@ -108,3 +99,4 @@ public class ParkingLog {
         isPaid = paid;
     }
 }
+

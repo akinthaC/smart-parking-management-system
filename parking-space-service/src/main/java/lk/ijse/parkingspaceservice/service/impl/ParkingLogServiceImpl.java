@@ -12,8 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -69,6 +71,8 @@ public class ParkingLogServiceImpl implements ParkingLogService {
         dto.setCheckOutTime(log.getCheckOutTime());
         dto.setParkingSpaceId(log.getParkingSpace().getId());
         dto.setActive(log.getActive());
+        dto.setDurationInMinutes(log.getDurationInMinutes());
+        dto.setTotalFee(log.getTotalFee());
         return dto;
     }
 
@@ -121,6 +125,9 @@ public class ParkingLogServiceImpl implements ParkingLogService {
         log.setCheckOutTime(null);
         log.setParkingSpace(selectedSpace);
         log.setActive(true);
+        log.setDurationInMinutes(0);
+        log.setTotalFee(0);
+        log.setPaid(false);
         ParkingLog savedLog = parkingLogRepository.save(log);
 
 
@@ -142,22 +149,73 @@ public class ParkingLogServiceImpl implements ParkingLogService {
             return new ApiResponse<>("No active reservation found for this vehicle", null);
         }
 
-        // Step 2: Update checkout details
+
+
+        long minutes = Duration.between(log.getCheckInTime(), LocalDateTime.now()).toMinutes();
+        long hours = (long) Math.ceil((double) minutes / 60.0); // round up partial hours
+        double ratePerHour = 30.0;
+        double totalFee = hours * ratePerHour;
+
         log.setCheckOutTime(LocalDateTime.now());
         log.setActive(false);
+        log.setDurationInMinutes(minutes);
+        log.setTotalFee(totalFee);
+        log.setPaid(false);
         parkingLogRepository.save(log);
 
-        // Step 3: Mark parking space as available
+
         ParkingSpace space = log.getParkingSpace();
         space.setAvailable(true);
         space.setStatus("AVAILABLE");
         spaceRepository.save(space);
 
-        // Step 4: Return updated log
+
+
+
+        // Step 4: Convert to DTO with total fee
         ParkingLogDTO dto = toDTO(log);
-        return new ApiResponse<>("Vehicle checked out successfully", dto);
+        dto.setTotalFee(totalFee);
+        dto.setDurationInMinutes(minutes);
+
+        return new ApiResponse<>("Vehicle checked out successfully. Please pay LKR " + totalFee, dto);
     }
 
+    @Override
+    public ParkingLogDTO getLastCompletedLog(String email, String vehicleNumber) {
+        ParkingLog log = parkingLogRepository
+                 .findTopByEmailAndVehicleNumberAndIsActiveFalseOrderByCheckOutTimeDesc(email, vehicleNumber)
+                .orElseThrow(() -> new RuntimeException("No completed log found"));
 
+        ParkingLogDTO dto = new ParkingLogDTO();
+        dto.setId(log.getId());
+        dto.setEmail(log.getEmail());
+        dto.setVehicleNumber(log.getVehicleNumber());
+        dto.setDurationInMinutes(log.getDurationInMinutes());
+        dto.setTotalFee(log.getTotalFee());
+        dto.setCheckOutTime(log.getCheckOutTime());
+        dto.setCheckInTime(log.getCheckInTime());
+        dto.setActive(log.getActive());
+        dto.setParkingSpaceId(log.getParkingSpace().getId());
+        dto.setPaid(log.isPaid());
+        return dto;
+    }
 
+    @Override
+    public boolean markAsPaid(String email, String vehicleNumber) {
+        Optional<ParkingLog> logOpt = parkingLogRepository
+                .findTopByEmailAndVehicleNumberOrderByCheckOutTimeDesc(email, vehicleNumber);
+
+        if (logOpt.isEmpty()) {
+            return false;
+        }
+
+        ParkingLog log = logOpt.get();
+        log.setPaid(true);
+        parkingLogRepository.save(log);
+        return true;
+    }
 }
+
+
+
+

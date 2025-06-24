@@ -3,14 +3,17 @@ package lk.ijse.parkingspaceservice.controller;
 
 import lk.ijse.parkingspaceservice.dto.ParkingLogDTO;
 import lk.ijse.parkingspaceservice.dto.ParkingSpaceDTO;
+import lk.ijse.parkingspaceservice.entity.ParkingLog;
 import lk.ijse.parkingspaceservice.response.ApiResponse;
 import lk.ijse.parkingspaceservice.service.ParkingLogService;
 import lk.ijse.parkingspaceservice.service.ParkingSpaceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/parking-spaces")
@@ -73,6 +76,37 @@ public class ParkingSpaceController {
             @RequestParam String vehicleNumber) {
         return ResponseEntity.ok(parkingLogService.vehicleCheckout(email, vehicleNumber));
     }
+
+
+    @GetMapping("/last-completed")
+    public ResponseEntity<ParkingLogDTO> getLastCompletedLog(
+            @RequestParam String email,
+            @RequestParam String vehicleNumber
+    ) {
+        try {
+            ParkingLogDTO dto = parkingLogService.getLastCompletedLog(email, vehicleNumber);
+            return ResponseEntity.ok(dto);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+    @PatchMapping("/mark-paid")
+    public ResponseEntity<String> markAsPaid(
+            @RequestParam String email,
+            @RequestParam String vehicleNumber) {
+
+        boolean updated = parkingLogService.markAsPaid(email, vehicleNumber);
+
+        if (!updated) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("❌ Parking log not found for email: " + email + " and vehicle: " + vehicleNumber);
+        }
+
+        return ResponseEntity.ok("✅ Parking log marked as paid");
+    }
+
+
 
 
 

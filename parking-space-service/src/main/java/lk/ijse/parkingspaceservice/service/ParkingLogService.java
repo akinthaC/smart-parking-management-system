@@ -12,5 +12,7 @@ public interface ParkingLogService {
     ApiResponse<?> reserveVehicle(ParkingLogDTO dto);
 
     ApiResponse<?> vehicleCheckout(String email, String vehicleNumber);
+    ParkingLogDTO getLastCompletedLog(String email, String vehicleNumber);
 
+    boolean markAsPaid(String email, String vehicleNumber);
 }

@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Eureka-Server" />
         <module name="user-service" />
+        <module name="payment-service" />
         <module name="Api-Gateway" />
         <module name="parking-space-service" />
       </profile>
@@ -28,6 +29,7 @@
       <module name="Api-Gateway" options="-parameters" />
       <module name="Eureka-Server" options="-parameters" />
       <module name="parking-space-service" options="-parameters" />
+      <module name="payment-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
       <module name="vehicle-service" options="-parameters" />
     </option>
