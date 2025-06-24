@@ -1,0 +1,685 @@
+{
+	"info": {
+		"_postman_id": "f0a13cf7-3a8b-4048-a9b3-0f9db4d1e79c",
+		"name": "Smart Parking Management System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40383457"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "User Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"John Doe\",\r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"1234e\",\r\n  \"role\": \"driver\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/user-service/api/v1/users/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"user-service",
+								"api",
+								"v1",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n  \"email\": \"john.doe@example.com\",\r\n  \"password\": \"1234e\"\r\n  \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/user-service/api/v1/users/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"user-service",
+								"api",
+								"v1",
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"Akintha\",\r\n    \"email\": \"akintha@example.com\",\r\n    \"password\": \"1234\",\r\n    \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/user-service/api/v1/users/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"user-service",
+								"api",
+								"v1",
+								"users",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User by ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"name\": \"Akintha\",\r\n    \"email\": \"akintha@example.com\",\r\n    \"password\": \"1234\",\r\n    \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/user-service/api/v1/users/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"user-service",
+								"api",
+								"v1",
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check is Avalibale user by email",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "vehicle",
+			"item": [
+				{
+					"name": "register vehicle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"plateNumber\": \"CBD-9090\",\r\n  \"type\": \"Sedan\",\r\n  \"color\": \"Red\",\r\n  \"userId\": 4\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/vehicle-service/api/v1/vehicles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"vehicle-service",
+								"api",
+								"v1",
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all vehicles",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"plateNumber\": \"CBD-9090\",\r\n  \"type\": \"Sedan\",\r\n  \"color\": \"Red\",\r\n  \"userId\": 4\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8083/vehicle-service/api/v1/vehicles",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"vehicle-service",
+								"api",
+								"v1",
+								"vehicles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"plateNumber\": \"CBD-9090\",\r\n  \"type\": \"Sedan\",\r\n  \"color\": \"Red\",\r\n  \"userId\": 4\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8083/vehicle-service/api/v1/vehicles/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"vehicle-service",
+								"api",
+								"v1",
+								"vehicles",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"plateNumber\": \"CBD-9090\",\r\n  \"type\": \"Van\",\r\n  \"color\": \"Black\",\r\n  \"userId\": 4\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8083/vehicle-service/api/v1/vehicles/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"vehicle-service",
+								"api",
+								"v1",
+								"vehicles",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"plateNumber\": \"CBD-9090\",\r\n  \"type\": \"Sedan\",\r\n  \"color\": \"Red\",\r\n  \"userId\": 4\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8083/vehicle-service/api/v1/vehicles/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"vehicle-service",
+								"api",
+								"v1",
+								"vehicles",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get vehicle by user id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"plateNumber\": \"CBD-9090\",\r\n  \"type\": \"Sedan\",\r\n  \"color\": \"Red\",\r\n  \"userId\": 4\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8083/vehicle-service/api/v1/vehicles/user/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"vehicle-service",
+								"api",
+								"v1",
+								"vehicles",
+								"user",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check vehicle is avalible by number plate",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"plateNumber\": \"CBD-9090\",\r\n  \"type\": \"Sedan\",\r\n  \"color\": \"Red\",\r\n  \"userId\": 4\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8083/vehicle-service/api/v1/vehicles/plate/CBD-9090",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"vehicle-service",
+								"api",
+								"v1",
+								"vehicles",
+								"plate",
+								"CBD-9090"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "parkin space",
+			"item": [
+				{
+					"name": "save new space",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"location\": \"Level 2 - A3\",\r\n  \"available\": true,\r\n  \"status\": \"AVAILABLE\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8084/parking-service/api/v1/parking-spaces/add-parking-space",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"parking-service",
+								"api",
+								"v1",
+								"parking-spaces",
+								"add-parking-space"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all spaces",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"location\": \"Level 2 - A3\",\r\n  \"available\": true,\r\n  \"status\": \"AVAILABLE\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8084/parking-service/api/v1/parking-spaces/getAll-parking-spaces",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"parking-service",
+								"api",
+								"v1",
+								"parking-spaces",
+								"getAll-parking-spaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/parking-service/api/v1/parking-spaces/4/status?status=AVAILABLE",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"parking-service",
+								"api",
+								"v1",
+								"parking-spaces",
+								"4",
+								"status"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "AVAILABLE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/parking-service/api/v1/parking-spaces/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"parking-service",
+								"api",
+								"v1",
+								"parking-spaces",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all only available spaces",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/parking-service/api/v1/parking-spaces/available",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"parking-service",
+								"api",
+								"v1",
+								"parking-spaces",
+								"available"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reserved vehicle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"john.doe@example.com\",\r\n  \"vehicleNumber\": \"CBD-9090\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8084/parking-service/api/v1/parking-spaces/reserved-vehicle",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"parking-service",
+								"api",
+								"v1",
+								"parking-spaces",
+								"reserved-vehicle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "vehicle chekout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/parking-service/api/v1/parking-spaces/checkout?email=john.doe@example.com&vehicleNumber=CBD-9090",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"parking-service",
+								"api",
+								"v1",
+								"parking-spaces",
+								"checkout"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "john.doe@example.com"
+								},
+								{
+									"key": "vehicleNumber",
+									"value": "CBD-9090"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get last complete vehicle",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/parking-service/api/v1/parking-spaces/last-completed?email=john.doe@example.com&vehicleNumber=CBD-9090",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"parking-service",
+								"api",
+								"v1",
+								"parking-spaces",
+								"last-completed"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "john.doe@example.com"
+								},
+								{
+									"key": "vehicleNumber",
+									"value": "CBD-9090"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mark as paid",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"john.doe@example.com\",\r\n  \"vehicleNumber\": \"CBD-9090\",\r\n  \"method\": \"CARD\",\r\n  \"status\": \"PAID\",\r\n  \"mockCardDTO\": {\r\n    \"cardNumber\": \"1234567890123456\",\r\n    \"cardHolder\": \"John Doe\",\r\n    \"expiry\": \"12/26\",\r\n    \"cvv\": \"123\"\r\n  }\r\n}\r\n"
+						},
+						"url": {
+							"raw": "http://localhost:8084/parking-service/api/v1/parking-spaces/mark-paid?email=john.doe@example.com&vehicleNumber=CBD-9090",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"parking-service",
+								"api",
+								"v1",
+								"parking-spaces",
+								"mark-paid"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "john.doe@example.com"
+								},
+								{
+									"key": "vehicleNumber",
+									"value": "CBD-9090"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment",
+			"item": [
+				{
+					"name": "make payment for resevation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"john.doe@example.com\",\r\n  \"vehicleNumber\": \"CBD-9090\",\r\n  \"method\": \"CARD\",\r\n  \"status\": \"PAID\",\r\n  \"mockCardDTO\": {\r\n    \"cardNumber\": \"1234567890123456\",\r\n    \"cardHolder\": \"John Doe\",\r\n    \"expiry\": \"12/26\",\r\n    \"cvv\": \"123\"\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8085/payment-service/api/v1/payment/pay",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"payment-service",
+								"api",
+								"v1",
+								"payment",
+								"pay"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
