@@ -27,3 +27,21 @@ Welcome to the **Smart Parking Management System** — a microservices-based sol
 - Fault-tolerant communication with RestTemplate  
 
 ---
+
+## 📂 Project Structure
+
+/smart-parking-management-system
+│
+├── payment-service
+├── parking-service
+├── user-service
+├── eureka-server
+├── gateway-service
+├── /docs
+│ └── /screenshots
+│ └── eureka_dashboard.png
+├── postman_collection.json
+└── README.md
+
+
+---
